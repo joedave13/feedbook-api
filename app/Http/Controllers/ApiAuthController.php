@@ -20,7 +20,13 @@ class ApiAuthController extends Controller
 
         $user = User::query()->create($data);
 
-        return new RegisterResource($user);
+        $token = $user->createToken('token')->plainTextToken;
+
+        return new RegisterResource([
+            'name' => $user->name,
+            'email' => $user->email,
+            'token' => $token
+        ]);
     }
 
     public function login(LoginRequest $request)

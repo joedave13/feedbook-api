@@ -47,6 +47,11 @@ class ApiAuthController extends Controller
         ]);
     }
 
+    public function getUserDetail(Request $request)
+    {
+        return $request->user();
+    }
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
